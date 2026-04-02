@@ -1803,11 +1803,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\whalan\\Documents\\tempo\\tempoapi\\tempoapi.csproj",
+      "projectUniqueName": "C:\\Users\\whalan\\Downloads\\tempo\\tempoapi\\tempoapi.csproj",
       "projectName": "tempoapi",
-      "projectPath": "C:\\Users\\whalan\\Documents\\tempo\\tempoapi\\tempoapi.csproj",
+      "projectPath": "C:\\Users\\whalan\\Downloads\\tempo\\tempoapi\\tempoapi.csproj",
       "packagesPath": "C:\\Users\\whalan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\whalan\\Documents\\tempo\\tempoapi\\obj\\",
+      "outputPath": "C:\\Users\\whalan\\Downloads\\tempo\\tempoapi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\whalan\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -11,7 +11,9 @@ namespace TempoApi.IoC
         {
             services.AddScoped<IAuthBussiness, AuthBussiness>();
             services.AddScoped<IFavoriteBussiness, FavoriteBussiness>();
+            services.AddScoped<IWatherBussiness, WeatherBusiness>();
             services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+            
         }
 
 

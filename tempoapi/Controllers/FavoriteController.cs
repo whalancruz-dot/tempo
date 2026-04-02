@@ -7,7 +7,7 @@ using TempoApi.Models;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-public class FavoriteController : ControllerBase
+public class FavoriteController : ApiBaseController
 {
     private readonly IFavoriteBussiness _favoriteBussiness;
     public FavoriteController(IFavoriteBussiness favoriteBussiness)
@@ -18,35 +18,20 @@ public class FavoriteController : ControllerBase
     [HttpGet]
     public IActionResult Buscar()
     {
-        var todasClaims = User.Claims.Select(c => new { c.Type, c.Value });
+        if (!UsuarioAutenticado) return Unauthorized("Usuário não identificado.");
 
-        var usuarioId = User.FindFirstValue(ClaimTypes.NameIdentifier)
-                     ?? User.FindFirstValue("nameid")
-                     ?? User.FindFirstValue("sub");
-
-        if (string.IsNullOrEmpty(usuarioId))
-            return Unauthorized(new { mensagem = "Claim não encontrada", claims = todasClaims });
-
-        return Ok(_favoriteBussiness.Buscar(usuarioId));
+        return Ok(_favoriteBussiness.Buscar(UsuarioId!));
     }
 
     [HttpPost]
     public IActionResult Adicionar([FromBody] Favorite parametros)
     {
+        if (!UsuarioAutenticado) return Unauthorized("Usuário não identificado.");
 
-        var todasClaims = User.Claims.Select(c => new { c.Type, c.Value });
-
-        var usuarioId = User.FindFirstValue(ClaimTypes.NameIdentifier)
-                     ?? User.FindFirstValue("nameid")
-                     ?? User.FindFirstValue("sub");
-
-        if (string.IsNullOrEmpty(usuarioId))
-            return Unauthorized(new { mensagem = "Claim não encontrada", claims = todasClaims });
-
-        parametros.UsuarioId = usuarioId;
+        parametros.UsuarioId = UsuarioId!;
 
         _favoriteBussiness.Salvar(parametros);
-        
+
         return Ok(new { mensagem = "Cidade favoritada com sucesso!" });
     }
 
