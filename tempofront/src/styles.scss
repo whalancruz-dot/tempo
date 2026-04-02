@@ -1,0 +1,14 @@
+@use 'assets/variables/custom_variables.scss';
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('./assets/fonts/Outfit/static/Outfit-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Outfit';
+  margin: 0;
+}
+

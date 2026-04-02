@@ -1,0 +1,7 @@
+CREATE TABLE CidadesFavoritas (
+    id UNIQUEIDENTIFIER DEFAULT NEWID() PRIMARY KEY,
+    cidadeid INT NOT NULL, 
+    nome NVARCHAR(100) NOT NULL,
+    state NVARCHAR(10) NOT NULL,
+    usuarioId NVARCHAR(200) NOT NULL
+);

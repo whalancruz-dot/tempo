@@ -1,0 +1,6 @@
+@tempoapi_HostAddress = http://localhost:5185
+
+GET {{tempoapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

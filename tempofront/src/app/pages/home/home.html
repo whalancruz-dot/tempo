@@ -1,0 +1,141 @@
+<div class="weather-container">
+
+    <header class="header">
+        <div class="header-content"></div>
+    </header>
+
+
+    <main class="main-content">
+        <div class="content-wrapper">
+
+            <section class="search-section">
+                <div class="search-card">
+
+                    <h2 class="card-title">
+                        Buscar Cidade
+                    </h2>
+
+                    <div class="search-group">
+                        <div class="search-input-wrapper">
+
+                            <p-iftalabel>
+                                <p-autoComplete [(ngModel)]="searchCity" [suggestions]="filteredCities()"
+                                    (onSelect)="selectCity($event.value)" emptyMessage="Nenhum resultado encontrado"
+                                    (completeMethod)="filterCities($event)" field="name" [forceSelection]="false"
+                                    styleClass="w-full" inputStyleClass="search-input" panelStyleClass="search-panel">
+                                    <ng-template let-value pTemplate="item">
+                                        <div class="city-suggestion">
+                                            <span class="city-name">{{ value.name }}</span>
+                                            <span class="city-state">{{ value.state }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-autoComplete>
+                                <label for="ac">Cidade</label>
+                            </p-iftalabel>
+
+
+                        </div>
+                    </div>
+
+                    @if (selectedCity()) {
+                    <div class="selected-city-info">
+                        <div class="city-info-content">
+                            <div class="city-info-header">
+                                <div class="city-info-text">
+                                    <h3 class="city-info-name">{{ selectedCity()!.name }}</h3>
+                                    <p class="city-info-state">{{ selectedCity()!.state }}, Brasil</p>
+                                </div>
+                                <button type="button" class="btn-favorite-toggle" [class.favorited]="isCityFavorited()"
+                                    (click)="toggleFavorite()"
+                                    [title]="isCityFavorited() ? 'Remover dos favoritos' : 'Adicionar aos favoritos'">
+                                    <span class="favorite-icon">
+                                        {{ isCityFavorited() ? '❤️' : '🤍' }}
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </section>
+
+            @if (hasFavorites()) {
+            <section class="favorites-section">
+
+                <h2 class="section-title">
+                    Cidades Favoritas
+                </h2>
+
+                <div class="favorites-grid">
+                    @for (city of favorites(); track city.id; let i = $index) {
+                    <div class="favorite-card" [style.animation-delay]="i * 0.05 + 's'">
+                        <button type="button" class="favorite-card-button" (click)="selectFavorite(city)"
+                            [class.active]="selectedCity()?.id === city.id">
+                            <div class="favorite-card-content">
+                                <h3 class="favorite-city-name">{{ city.name }}</h3>
+                                <p class="favorite-city-state">{{ city.state }}</p>
+                            </div>
+                            <span class="favorite-card-arrow">→</span>
+                        </button>
+
+                        <button type="button" class="favorite-delete-btn" (click)="removeFavorite(city)"
+                            title="Remover dos favoritos" pButton icon="pi pi-trash" rounded severity="danger" text>
+                        </button>
+                    </div>
+                    }
+                </div>
+            </section>
+            }
+
+            @if (hasForecast()) {
+            <section class="forecast-section">
+
+                <h2 class="section-title">
+                    Previsão para
+                    <span class="forecast-city-name">{{ selectedCity()!.name }}</span>
+                </h2>
+
+
+                @if (isLoadingForecast()) {
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <p>Carregando previsão...</p>
+                </div>
+                } @else {
+                <div class="forecast-cards">
+                    @for (day of forecast(); track day.data; let i = $index) {
+                    <div class="forecast-card" [style.animation-delay]="i * 0.1 + 's'">
+                        <div class="forecast-header">
+                            <h3 class="forecast-day">{{ day.diaSemana  }}</h3>
+                            <span class="forecast-date">{{ day.data }}</span>
+                        </div>
+
+                        <div class="forecast-body">
+                            <div class="forecast-icon">{{ day.icone }}</div>
+                            <div class="forecast-temp">
+                                <span class="temp-value">{{ day.temperatura }}</span>
+                            </div>
+                            <p class="forecast-condition">{{ day.clima }}</p>
+                        </div>
+
+                        <div class="forecast-footer">
+                            <div class="forecast-detail">
+                                <span class="detail-label">Vento</span>
+                                <span class="detail-value">{{ day.vento  }}</span>
+                            </div>
+                            <div class="forecast-detail">
+                                <span class="detail-label">Umidade</span>
+                                <span class="detail-value">{{ day.umidade }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                }
+            </section>
+            }
+
+        </div>
+    </main>
+
+</div>
