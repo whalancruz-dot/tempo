@@ -123,9 +123,7 @@
     background: #0f172a !important;
     border: 2px solid #334155 !important;
     color: #ffffff !important;
-    // padding: 0.875rem 1.25rem !important;
     border-radius: 0.75rem !important;
-    // font-size: 1rem !important;
     font-family: inherit !important;
     transition: all 0.3s ease !important;
 
@@ -208,14 +206,12 @@
   align-items: center;
 }
 
-/* Estilos para o grupo de botões de usuário logado */
 .user-logged-group {
   display: flex;
-  gap: 10px; /* Espaçamento entre os botões */
+  gap: 10px;
   align-items: center;
 }
 
-/* Garante que o botão de Boas-Vindas pareça desabilitado sem ficar feio */
 .btn-login[disabled] {
   cursor: default;
   opacity: 0.9;

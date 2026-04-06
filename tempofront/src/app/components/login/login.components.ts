@@ -51,7 +51,6 @@ export class LoginModalComponent implements OnInit {
 
     ngOnInit() {
         this.initializeForm();
-        // this.checkAuthStatus();
     }
 
     private initializeForm() {
