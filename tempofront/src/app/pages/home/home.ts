@@ -14,6 +14,7 @@ import { FavoriteService } from '../../services/favorite.service';
 import { AuthService } from '../../services/auth/auth.service';
 import { IFavorite } from '../../interface/favorite;interfaces';
 import { IForecast } from '../../interface/forecast.interfaces';
+import { LoginModalComponent } from '../../components/login/login.components';
 
 
 @Component({
@@ -26,7 +27,8 @@ import { IForecast } from '../../interface/forecast.interfaces';
     ButtonModule,
     ToastModule,
     ConfirmDialogModule,
-    IftaLabelModule
+    IftaLabelModule,
+    LoginModalComponent
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './home.html',
@@ -49,7 +51,7 @@ export class Home implements OnInit {
   private authService = inject(AuthService);
 
   hasForecast = computed(() => this.forecast().length > 0);
-  hasFavorites = computed(() => this.favorites().length > 0);
+  hasFavorites = computed(() => this.favorites().length > 0 && this.authService.getToken());
   selectedCityDisplay = computed(() => {
     const city = this.selectedCity();
     return city ? `${city.name}, ${city.state}` : '';
@@ -102,7 +104,6 @@ export class Home implements OnInit {
           name: item.nome,
           state: item.state
         }));
-
 
         this.favorites.set(mappedCities);
       },
@@ -181,7 +182,6 @@ export class Home implements OnInit {
             this.isCityFavorited.set(true);
           }
         });
-
       }
     });
 

@@ -1,2 +1,25 @@
-/bin
-/obj
+## Componentes de Build do .NET
+[Bb]in/
+[Oo]bj/
+
+## Pastas de Publicação
+publish/
+store/
+
+## Resultados de Testes
+TestResults/
+
+## Arquivos de Usuário do VS/VS Code
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+
+## Cache e Logs
+*.log
+.ionide/
+
+## Outros
+/Debug
+/Release

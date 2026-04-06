@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, tap, catchError, throwError, shareReplay } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { IAuthToken } from '../../interface/authtoken.interfaces';
@@ -7,6 +7,7 @@ import { ITokenPayload } from '../../interface/tokenpayload.interfaces';
 import { selectAuthToken } from '../../store/authToken/authToken.selectors';
 import { HttpClientService } from '../request/http-client.service';
 import { loadAuthToken } from '../../store/authToken/authToken.actions';
+import { IResult } from '../../interface/result.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,25 +18,11 @@ export class AuthService {
 
   IAuthToken = toSignal(this.store.select(selectAuthToken), { initialValue: null });
 
-  public checkIn(): Observable<IAuthToken> {
-    if (this.refreshToken$) return this.refreshToken$;
-    this.refreshToken$ = this.httpClientService.get<IAuthToken>(`auth/GetToken`)
-      .pipe(
-        tap(tokenData => {
-          this.setToken(tokenData);
-          this.refreshToken$ = undefined;
-        }),
-        catchError(error => {
-          this.refreshToken$ = undefined;
-          return throwError(() => error);
-        }),
-        shareReplay(1)
-      );
-
-    return this.refreshToken$;
+  checkIn(email: string, password: string): Observable<IResult<string>> {
+    return this.httpClientService.get<IResult<string>>(`auth/GetToken`, { email, password });
   }
 
-  private setToken(token: IAuthToken) {
+  setToken(token: IAuthToken) {
     this.store.dispatch(
       loadAuthToken({ authToken: token })
     );
@@ -80,3 +67,5 @@ export class AuthService {
 
 
 }
+
+

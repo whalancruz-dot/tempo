@@ -1,0 +1,74 @@
+<div class="login-trigger">
+    @if (isAuthenticated()) {
+    <button type="button" class="btn-login">
+        <span class="login-text">Olá, <b>{{ nomeUser() }}</b></span>
+    </button>
+
+    <button type="button" class="btn-logout-danger" (click)="logout()" title="Deslogar">
+        <span class="login-icon">Sair</span>
+    </button>
+    } @else {
+    <button type="button" class="btn-login" (click)="showLoginDialog()" [disabled]="isLoading()">
+        <span class="login-text">Entrar</span>
+    </button>
+    }
+
+</div>
+
+<p-dialog [visible]="visible()" (visibleChange)="onVisibleChange($event)" [header]="'Acessar Conta'" [modal]="true"
+    [style]="{ width: '100%', maxWidth: '450px' }" [draggable]="false" [resizable]="false" [closeOnEscape]="true"
+    styleClass="login-dialog" [showHeader]="true">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+        <div class="form-group">
+            <p-iftalabel>
+                <input pInputText type="email" id="email" formControlName="email" class="login-input"
+                    [ngClass]="{ 'ng-invalid': isFieldInvalid('email') }">
+                <label for="email">Email</label>
+            </p-iftalabel>
+
+            <div class="error-message" *ngIf="isFieldInvalid('email')">
+                <small *ngIf="loginForm.get('email')?.errors?.['required']">
+                    Email é obrigatório
+                </small>
+                <small *ngIf="loginForm.get('email')?.errors?.['email']">
+                    Email inválido
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p-iftalabel>
+                <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false"
+                    inputStyleClass="login-input" [inputStyle]="{ width: '100%' }"
+                    [ngClass]="{ 'ng-invalid': isFieldInvalid('password') }" styleClass="w-full">
+                </p-password>
+                <label for="password">Senha</label>
+            </p-iftalabel>
+
+            <div class="error-message" *ngIf="isFieldInvalid('password')">
+                <small *ngIf="loginForm.get('password')?.errors?.['required']">
+                    Senha é obrigatória
+                </small>
+                <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                    Senha deve ter no mínimo 6 caracteres
+                </small>
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <button type="submit" pButton label="Entrar" [loading]="isLoading()"
+                [disabled]="loginForm.invalid || isLoading()" class="btn-submit">
+            </button>
+
+            <button type="button" pButton label="Cancelar" severity="secondary" (click)="closeDialog()"
+                [disabled]="isLoading()">
+            </button>
+        </div>
+
+    </form>
+
+</p-dialog>
+
+<p-toast></p-toast>

@@ -1,9 +1,12 @@
 
+
+using TempoApi.Models;
+
 namespace TempoApi.Business.Contract
 {
     public interface IAuthBussiness
     {
-        string GerarToken(string uuid);
+        Result<string> Authentication(UserLoginRequest parametros);
     }
 }
 

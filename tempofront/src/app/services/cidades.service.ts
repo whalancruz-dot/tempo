@@ -5,6 +5,7 @@ import { IBGECity } from '../interface/ibge.interfaces';
 import { HttpClientService } from './request/http-client.service';
 import { IApiResponseForecast, IForecast } from '../interface/forecast.interfaces';
 import { HttpClient } from '@angular/common/http';
+import { IResult } from '../interface/result.interfaces';
 
 
 @Injectable({ providedIn: 'root' })

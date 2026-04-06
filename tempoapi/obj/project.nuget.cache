@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "SH7KXuzThsw=",
+  "dgSpecHash": "XVXB3z2/G+I=",
   "success": true,
   "projectFilePath": "C:\\Users\\whalan\\Downloads\\tempo\\tempoapi\\tempoapi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\whalan\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\whalan\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\whalan\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512",
     "C:\\Users\\whalan\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\whalan\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.12\\microsoft.aspnetcore.authentication.jwtbearer.8.0.12.nupkg.sha512",
     "C:\\Users\\whalan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
