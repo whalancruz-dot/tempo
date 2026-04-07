@@ -9,7 +9,7 @@ Antes de começar, certifique-se de ter instalado:
 
     .NET SDK (Versão 8.0 ou superior recomendada)
 
-    SQL Server ou o banco de dados configurado no seu appsettings.json.
+    Postgree ou o banco de dados configurado no seu appsettings.json.
 
     VS Code (opcional, mas recomendado).
 

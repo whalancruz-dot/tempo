@@ -7,7 +7,7 @@ namespace TempoApi.Models
         public int CidadeId { get; set; }
         public string Nome { get; set; }
         public string State { get; set; }
-        public string UsuarioId { get; set; }
+        public Guid UsuarioId { get; set; }
     }
 
 

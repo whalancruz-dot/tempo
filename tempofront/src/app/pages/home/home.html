@@ -47,6 +47,7 @@
                                     <h3 class="city-info-name">{{ selectedCity()!.name }}</h3>
                                     <p class="city-info-state">{{ selectedCity()!.state }}, Brasil</p>
                                 </div>
+                                @if (selectedCity() && authService.getToken()) {
                                 <button type="button" class="btn-favorite-toggle" [class.favorited]="isCityFavorited()"
                                     (click)="toggleFavorite()"
                                     [title]="isCityFavorited() ? 'Remover dos favoritos' : 'Adicionar aos favoritos'">
@@ -54,6 +55,7 @@
                                         {{ isCityFavorited() ? '❤️' : '🤍' }}
                                     </span>
                                 </button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -108,7 +110,7 @@
                     @for (day of forecast(); track day.data; let i = $index) {
                     <div class="forecast-card" [style.animation-delay]="i * 0.1 + 's'">
                         <div class="forecast-header">
-                            <h3 class="forecast-day">{{ day.diaSemana  }}</h3>
+                            <h3 class="forecast-day">{{ day.diaSemana }}</h3>
                             <span class="forecast-date">{{ day.data }}</span>
                         </div>
 
@@ -123,7 +125,7 @@
                         <div class="forecast-footer">
                             <div class="forecast-detail">
                                 <span class="detail-label">Vento</span>
-                                <span class="detail-value">{{ day.vento  }}</span>
+                                <span class="detail-value">{{ day.vento }}</span>
                             </div>
                             <div class="forecast-detail">
                                 <span class="detail-label">Umidade</span>

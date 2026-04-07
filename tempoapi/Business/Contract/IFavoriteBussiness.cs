@@ -7,7 +7,7 @@ namespace TempoApi.Business.Contract
     {
         public string Salvar(Favorite parametro);
         public string Remover(Guid id);
-        IEnumerable<Favorite> Buscar(string usuarioid);
+        IEnumerable<Favorite> Buscar(Guid usuarioid);
     }
 }
 

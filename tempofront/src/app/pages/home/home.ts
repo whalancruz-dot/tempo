@@ -8,7 +8,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { ICity } from '../../interface/city.interfaces';
-import { HttpClient } from '@angular/common/http';
 import { CidadesService } from '../../services/cidades.service';
 import { FavoriteService } from '../../services/favorite.service';
 import { AuthService } from '../../services/auth/auth.service';
@@ -45,10 +44,9 @@ export class Home implements OnInit {
   isCityFavorited = signal<boolean>(false);
   allCities: ICity[] = [];
 
-  private http = inject(HttpClient);
   private cidadesService = inject(CidadesService);
   private favoriteService = inject(FavoriteService);
-  private authService = inject(AuthService);
+  public  authService = inject(AuthService);
 
   hasForecast = computed(() => this.forecast().length > 0);
   hasFavorites = computed(() => this.favorites().length > 0 && this.authService.getToken());
@@ -95,6 +93,8 @@ export class Home implements OnInit {
   }
 
   private loadFavoritesFromApi() {
+    if(!this.authService.getToken()) return;
+
     this.favoriteService.getFavorite().subscribe({
       next: (response) => {
 
@@ -172,8 +172,7 @@ export class Home implements OnInit {
         const paramtros: IFavorite = {
           cidadeId: Number(response.cidadeId),
           nome: city.name,
-          state: city.state,
-          usuarioId: ''
+          state: city.state
         };
 
         this.favoriteService.addFavorite(paramtros).subscribe({

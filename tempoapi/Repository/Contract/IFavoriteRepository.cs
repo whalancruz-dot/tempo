@@ -8,6 +8,6 @@ namespace TempoApi.Repository
     {
         string Salvar(Favorite parametro);
         string Remover(Guid id);
-        IEnumerable<Favorite> Buscar(string usuarioid);
+        IEnumerable<Favorite> Buscar(Guid usuarioid);
     }
 }

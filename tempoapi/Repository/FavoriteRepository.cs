@@ -35,7 +35,7 @@ namespace TempoApi.Repository
             return "Cidade favoritada com sucesso!";
         }
 
-        public IEnumerable<Favorite> Buscar(string usuarioid)
+        public IEnumerable<Favorite> Buscar(Guid usuarioid)
         {
             string sql = @"
             SELECT id, cidadeid as CidadeId, nome, usuarioId, state 

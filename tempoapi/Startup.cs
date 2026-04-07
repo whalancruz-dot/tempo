@@ -6,6 +6,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.OpenApi.Models;
 using TempoApi.Business;
 using TempoApi.IoC;
+using Npgsql;
 
 namespace TempoApi
 {
@@ -85,7 +86,8 @@ namespace TempoApi
                     };
                 });
 
-            services.AddScoped<IDbConnection>(_ => new SqlConnection(Configuration.GetConnectionString("Default")));
+
+            services.AddScoped<IDbConnection>(_ => new NpgsqlConnection(Configuration.GetConnectionString("Default")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

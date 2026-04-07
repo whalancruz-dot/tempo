@@ -23,7 +23,7 @@ namespace TempoApi.Business
             return _favoriteRepository.Salvar(parametro);
         }
 
-        public IEnumerable<Favorite> Buscar(string usuarioid)
+        public IEnumerable<Favorite> Buscar(Guid usuarioid)
         {
             return _favoriteRepository.Buscar(usuarioid);
         }

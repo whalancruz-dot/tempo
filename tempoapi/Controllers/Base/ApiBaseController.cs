@@ -6,10 +6,23 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public abstract class ApiBaseController : ControllerBase
 {
-    protected string? UsuarioId => 
-        User.FindFirstValue(ClaimTypes.NameIdentifier) ?? 
-        User.FindFirstValue("nameid") ?? 
-        User.FindFirstValue("sub");
+    // Retorna o Guid se o claim existir e for válido, caso contrário retorna Guid.Empty ou null
+    protected Guid UsuarioId
+    {
+        get
+        {
+            var idString = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? 
+                           User.FindFirstValue("nameid") ?? 
+                           User.FindFirstValue("sub");
 
-    protected bool UsuarioAutenticado => !string.IsNullOrEmpty(UsuarioId);
+            if (Guid.TryParse(idString, out Guid guidId))
+            {
+                return guidId;
+            }
+
+            return Guid.Empty;
+        }
+    }
+
+    protected bool UsuarioAutenticado => UsuarioId != Guid.Empty;
 }
