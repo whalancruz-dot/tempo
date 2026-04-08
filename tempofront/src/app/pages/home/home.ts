@@ -202,4 +202,8 @@ export class Home implements OnInit {
     this.loadForecast(Number(city.cidadeId));
   }
 
+  emitEventLoggin() {
+     this.loadFavoritesFromApi();
+  }
+
 }

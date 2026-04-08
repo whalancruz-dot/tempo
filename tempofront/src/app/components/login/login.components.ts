@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject, computed } from '@angular/core';
+import { Component, OnInit, signal, inject, computed, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
@@ -48,6 +48,7 @@ export class LoginModalComponent implements OnInit {
     private messageService = inject(MessageService);
     private fb = inject(FormBuilder);
     private store = inject(Store);
+    onLoginSuccess = output<IAuthToken>(); 
 
     ngOnInit() {
         this.initializeForm();
@@ -100,6 +101,7 @@ export class LoginModalComponent implements OnInit {
                     const parametros: IAuthToken = { token: response.data, type: '' };
 
                     this.authService.setToken(parametros);
+                    this.onLoginSuccess.emit(parametros);
                 };
 
                 this.closeDialog();
